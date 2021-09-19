@@ -13,7 +13,10 @@ namespace dasPIDLab
 {
     public partial class Main : Form
     {
+        //Chart variables
         double xAxisValues;
+        public const int CHARTMAXPOINTS = 500;
+        
         NumberStyles style;
         CultureInfo provider;
         // Control Loop Variables
@@ -156,6 +159,14 @@ namespace dasPIDLab
                     chartPID.Series[0].Points.AddXY(xAxisValues, tmpMeasValue);
                     chartPID.Series[1].Points.AddXY(xAxisValues, tmpSetpoint);
                     chartPID.Series[2].Points.AddXY(xAxisValues, tmpControlValue);
+                    if (chartPID.Series[0].Points.Count > CHARTMAXPOINTS)
+                    {
+                        chartPID.ChartAreas[0].AxisX.Minimum += 1;
+                        chartPID.ChartAreas[0].AxisX.Maximum += 1;
+                        chartPID.Series[0].Points.RemoveAt(0);
+                        chartPID.Series[1].Points.RemoveAt(0);
+                        chartPID.Series[2].Points.RemoveAt(0);
+                    }
                 }
 
                 //Scale controlValue to the resolution wanted and send it on the serial port
@@ -210,7 +221,9 @@ namespace dasPIDLab
         private void timerControlLoop_Tick(object sender, EventArgs e)
         {
             //The Control Loop should always be on a fixed cycle to avoid signal aliasing
-            //The sample time Ts should be equal to the TimerControlLoop.Intervall 
+            //The sample time Ts should be equal to the TimerControlLoop.Intervall
+            
+            
 
             //Get the processValue from the textboxReceived
             if (string.IsNullOrEmpty(textBoxReceived.Text) == false)
@@ -223,7 +236,7 @@ namespace dasPIDLab
                 double.TryParse(textBoxSetpoint.Text, style, provider, out setpointValue);
             }
             //Calculate errorValueK 
-            errorValueK = setpointValue - processValue;
+            errorValueK = (100.0/2)*(setpointValue - processValue); //The temperature span is about 2 degrees.
 
             //Calculate controllValueP,controllValueI,controllValueD
             controlValueP = proportionalK * (errorValueK - errorValueK_1);
@@ -262,13 +275,6 @@ namespace dasPIDLab
             //transfer controlvalue to textbox for sending.
             textBoxMan.Text = controlValueK.ToString("0.00", new CultureInfo("en-US", false));
         }   
-
-
-
-
-
-
-
 
 
         

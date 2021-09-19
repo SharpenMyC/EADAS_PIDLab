@@ -74,8 +74,11 @@ namespace dasPIDLab
             // 
             chartArea1.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
             chartArea1.AxisX.IsStartedFromZero = false;
-            chartArea1.AxisY.Maximum = 23D;
-            chartArea1.AxisY.Minimum = 21D;
+            chartArea1.AxisX.Maximum = 500D;
+            chartArea1.AxisX.Minimum = 0D;
+            chartArea1.AxisX.ScrollBar.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            chartArea1.AxisY.Maximum = 24D;
+            chartArea1.AxisY.Minimum = 22D;
             chartArea1.AxisY2.Maximum = 100D;
             chartArea1.AxisY2.Minimum = 0D;
             chartArea1.Name = "ChartArea1";
@@ -102,7 +105,7 @@ namespace dasPIDLab
             this.chartPID.Series.Add(series1);
             this.chartPID.Series.Add(series2);
             this.chartPID.Series.Add(series3);
-            this.chartPID.Size = new System.Drawing.Size(739, 249);
+            this.chartPID.Size = new System.Drawing.Size(920, 249);
             this.chartPID.TabIndex = 0;
             this.chartPID.Text = "PID";
             // 
@@ -250,9 +253,9 @@ namespace dasPIDLab
             this.checkBoxDataReceived.AutoSize = true;
             this.checkBoxDataReceived.Location = new System.Drawing.Point(152, 86);
             this.checkBoxDataReceived.Name = "checkBoxDataReceived";
-            this.checkBoxDataReceived.Size = new System.Drawing.Size(95, 20);
+            this.checkBoxDataReceived.Size = new System.Drawing.Size(116, 20);
             this.checkBoxDataReceived.TabIndex = 19;
-            this.checkBoxDataReceived.Text = "DataMottatt";
+            this.checkBoxDataReceived.Text = "Ny data mottatt";
             this.checkBoxDataReceived.UseVisualStyleBackColor = true;
             this.checkBoxDataReceived.CheckedChanged += new System.EventHandler(this.checkBoxDataReceived_CheckedChanged);
             // 
@@ -371,7 +374,7 @@ namespace dasPIDLab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(763, 488);
+            this.ClientSize = new System.Drawing.Size(944, 488);
             this.Controls.Add(this.labelSek);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelResolution);
